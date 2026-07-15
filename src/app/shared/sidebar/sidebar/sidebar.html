@@ -1,0 +1,33 @@
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name">TaskHub</span>
+  </div>
+
+  <div class="sidebar-user">
+    <div class="avatar">{{ username?.charAt(0)?.toUpperCase() }}</div>
+    <div class="user-info">
+      <span class="user-name">{{ username }}</span>
+      <span class="user-status">● Online</span>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">📊</span> <span>Dashboard</span>
+    </a>
+    <a routerLink="/items" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">📦</span> <span>Items</span>
+    </a>
+    <a routerLink="/settings" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">⚙️</span> <span>Settings</span>
+    </a>
+    <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+      <span class="nav-icon">👤</span> <span>Profile</span>
+    </a>
+  </nav>
+
+  <button class="logout-btn" (click)="logout()">
+    <span class="nav-icon">↪</span> <span>Logout</span>
+  </button>
+</aside>

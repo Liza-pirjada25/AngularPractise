@@ -1,0 +1,27 @@
+<div class="page-layout">
+  <app-sidebar></app-sidebar>
+
+  <main class="main-content">
+    <div class="topbar">
+      <h1>👤 Profile</h1>
+      <p>Your account information</p>
+    </div>
+
+    <div class="profile-card">
+      <div class="profile-avatar">{{ username?.charAt(0)?.toUpperCase() }}</div>
+      <h2>{{ username }}</h2>
+      <p class="profile-role">Demo User</p>
+
+      <div class="profile-stats">
+        <div class="stat">
+          <span class="stat-num">Active</span>
+          <span class="stat-label">Status</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">CrudCrud</span>
+          <span class="stat-label">Data Source</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

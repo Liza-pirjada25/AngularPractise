@@ -1,0 +1,76 @@
+<div class="item-section">
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-label">Total Items</span>
+      <span class="stat-value">{{ items.length }}</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">Status</span>
+      <span class="stat-value" [class.status-loading]="loading">{{ loading ? 'Syncing...' : 'Up to date' }}</span>
+    </div>
+  </div>
+
+  <div class="add-card">
+    <h3>Add New Item</h3>
+    <form #addForm="ngForm" (ngSubmit)="addItem()" novalidate class="inline-form">
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="newItem.name"
+        required
+        placeholder="Item name"
+      />
+      <input
+        type="text"
+        name="description"
+        [(ngModel)]="newItem.description"
+        placeholder="Description"
+      />
+      <button type="submit" [disabled]="addForm.invalid">+ Add Item</button>
+    </form>
+  </div>
+
+  <div class="list-card">
+    <div class="list-header">
+      <h3>Your Items</h3>
+      <span class="count-badge" *ngIf="items.length > 0">{{ items.length }} total</span>
+    </div>
+
+    <div class="state-msg" *ngIf="loading">
+      <div class="spinner"></div>
+      Loading items...
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && items.length === 0">
+      <div class="empty-icon">📭</div>
+      <p>No items yet</p>
+      <span>Add your first item using the form above</span>
+    </div>
+
+    <ul>
+      <li *ngFor="let item of items" appHighlight class="item-row">
+        <ng-container *ngIf="editingItem?._id !== item._id; else editRow">
+          <div class="item-info">
+            <span class="item-name">{{ item.name }}</span>
+            <span class="item-desc" *ngIf="item.description">{{ item.description }}</span>
+          </div>
+          <div class="item-actions">
+            <button class="btn-edit" (click)="startEdit(item)">Edit</button>
+            <button class="btn-delete" (click)="deleteItem(item._id)">Delete</button>
+          </div>
+        </ng-container>
+
+        <ng-template #editRow>
+          <form #editForm="ngForm" (ngSubmit)="saveEdit()" class="edit-form">
+            <input type="text" name="editName" [(ngModel)]="editingItem!.name" required placeholder="Name" />
+            <input type="text" name="editDescription" [(ngModel)]="editingItem!.description" placeholder="Description" />
+            <div class="item-actions">
+              <button type="submit" class="btn-save" [disabled]="editForm.invalid">Save</button>
+              <button type="button" class="btn-cancel" (click)="cancelEdit()">Cancel</button>
+            </div>
+          </form>
+        </ng-template>
+      </li>
+    </ul>
+  </div>
+</div>
